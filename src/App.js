@@ -23,7 +23,7 @@ const App = () => {
     // Execute the search
     const search = async (e) => {
         if (e.key === "Enter") {
-            const data = await fetchWeather(query)
+            await fetchWeather(query)
                 .then((data) => {
                     setWeather(data);
                     setQuery("");
