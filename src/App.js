@@ -90,7 +90,7 @@ const App = () => {
                     whileHover = {{
                       scale: 1.1,
                       textShadow: "0px 0px 8px rgb(255,255,255)",
-                      boxShadow: "0px 0px 15px rgb(20,255,255)"
+                      boxShadow: "0px 0px 20px rgb(20,255,255)"
                     }}
                 />
                 <motion.div
@@ -99,6 +99,7 @@ const App = () => {
                     animate={{ x: 0 }}
                     transition={{ delay: 0.5, type: "spring", stiffness: 120 }}
                     whileHover = {{
+                      fontStyle: "italic",
                       textShadow: "0px 0px 18px rgb(0,255,0)",
                     }}
                 >
