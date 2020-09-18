@@ -7,14 +7,16 @@ body,
     color: #1e2432;
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 
 .main-container {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)),
+    background: linear-gradient(rgba(126, 192, 4, 0.3), rgba(144, 101, 184, 0.418)),
         url("https://hdwallpaper20.com/wp-content/uploads/2017/07/wallpaper-wp4001752.jpg");
     background-size: cover;
     background-position: center;
 }
+
 
 .main-container {
     height: 100%;
@@ -54,11 +56,11 @@ body,
     background: rgb(34, 195, 70);
     background: linear-gradient(
         0deg,
-        rgba(34, 195, 70, 1) 2%,
-        rgba(72, 217, 51, 1) 36%,
-        rgba(93, 229, 41, 1) 55%,
-        rgba(92, 253, 45, 1) 70%,
-        rgba(45, 253, 155, 1) 93%
+        rgba(34, 195, 70, 0.7) 2%,
+        rgba(72, 217, 51, 0.7) 36%,
+        rgba(93, 229, 41, 0.7) 55%,
+        rgba(92, 253, 45, 0.7) 70%,
+        rgba(45, 253, 155, 0.7) 93%
     );
     box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
 }
@@ -142,6 +144,7 @@ p {
     text-align: center;
     transition: transform 2s;
     transform-style: preserve-3d;
+    
 }
 
 .flip-card:hover .flip-card-inner {
@@ -174,8 +177,8 @@ p {
     background: rgb(2, 0, 36);
     background: linear-gradient(
         180deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgba(0, 212, 255, 1) 100%
+        rgba(85, 82, 134, 0.7) 0%,
+        rgba(0, 212, 255, 0.7) 100%
     );
     color: black;
     transform: rotateY(180deg);
@@ -206,6 +209,10 @@ p {
     font-size: 25px;
     font-family: sans-serif;
     font-weight: 100;
+}
+
+.pwetter {
+    z-index: -1000;
 }
 
 .info-label {

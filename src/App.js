@@ -2,23 +2,42 @@ import React, { useState, useEffect } from "react";
 import { getCardinal } from "./utils/WindDirections";
 import { fetchWeather } from "./api/fetchWeather";
 import CookieConsent from "react-cookie-consent";
-import cookie from "react-cookies";
+import cookie from "react-cookiesimport { motion } from "framer-motion";
+import useSound from "use-sound";
+import errorSound from "./sounds/errorentry.wav";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
+
+toast.configure();
 
 const App = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
     // Used for storing the current selected location
     const [remember, setRemember] = useState(false);
+    const [play] = useSound(errorSound);
 
+    // Execute the search
     const search = async (e) => {
         if (e.key === "Enter") {
-            const data = await fetchWeather(query);
-            setWeather(data);
-            console.log(data);
-            setQuery("");
-            setRemember(false);
+            const data = await fetchWeather(query)
+                .then((data) => {
+                    setWeather(data);
+                    setQuery("");
+                    setRemember(false);
+                })
+                .catch((err) => {
+                    play();
+                    setQuery("");
+                    setRemember(false);
+                    return toast("Could not find entered location!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        type: "error",
+                        autoClose: 3000,
+                    });
+                });
         }
     };
 
@@ -55,9 +74,8 @@ const App = () => {
                     Sorry, but it's the law!
                 </span>
             </CookieConsent>
-
             <div className="main-container">
-                <input
+                <motion.input
                     type="text"
                     className="search"
                     placeholder="Search..."
@@ -65,19 +83,46 @@ const App = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyPress={search}
                     autoFocus
+                    initial={{ y: -1000 }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 120 }}
+                    whileHover = {{
+                      scale: 1.1,
+                      textShadow: "0px 0px 8px rgb(255,255,255)",
+                      boxShadow: "0px 0px 15px rgb(20,255,255)"
+                    }}
                 />
-                <div className="remember">
+                <motion.div
+                    className="remember"
+                    initial={{ x: -1000 }}
+                    animate={{ x: 0 }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 120 }}
+                    whileHover = {{
+                      textShadow: "0px 0px 18px rgb(0,255,0)",
+                    }}
+                >
                     <input
                         type="checkbox"
                         onChange={rememberLocation}
                         checked={remember}
+                        initial={{ y: -1000 }}
+                        animate={{ y: 0 }}
+                        transition={{
+                            delay: 0.5,
+                            type: "spring",
+                            stiffness: 120,
+                        }}
                     />
                     <label className="remember-label" htmlFor="remember">
                         Remember location
                     </label>
-                </div>
+                </motion.div>
                 {weather.main && (
-                    <div className="flip-card">
+                    <motion.div className="flip-card"
+                      initial={{ x: '100vw'}}
+                      animate={{ x: 0 }}
+                      transition={{type:"spring", delay:0.5}}
+                    >
                         <div className="flip-card-inner">
                             <div className="flip-card-front">
                                 <div className="city">
@@ -160,7 +205,7 @@ const App = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </div>
         </>
