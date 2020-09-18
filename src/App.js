@@ -11,7 +11,6 @@ const App = () => {
     const [weather, setWeather] = useState({});
     // Used for storing the current selected location
     const [remember, setRemember] = useState(false);
-    const [storedLocation, setStoredLocation] = useState("");
 
     const search = async (e) => {
         if (e.key === "Enter") {
@@ -27,15 +26,12 @@ const App = () => {
         // Store the location as a cookie
         setRemember(e.target.checked);
         // Store the default location as a cookie
-        setStoredLocation(query);
         cookie.save("default_weather_location", query);
     };
 
     useEffect(() => {
         const myLocation = cookie.load("default_weather_location");
         if (myLocation) {
-            setStoredLocation(myLocation);
-            console.log(myLocation);
             setRemember(true);
             setQuery(myLocation);
         } else {
