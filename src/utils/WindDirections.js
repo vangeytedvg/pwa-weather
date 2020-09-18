@@ -2,7 +2,6 @@
  * Given "0-360" returns the nearest cardinal direction "N/NE/E/SE/S/SW/W/NW"
  */
 export function getCardinal(deg) {
-  console.log("From getCardinal", deg)
     if (deg > 11.25 && deg < 33.75) {
         return "NNE";
     } else if (deg > 33.75 && deg < 56.25) {
